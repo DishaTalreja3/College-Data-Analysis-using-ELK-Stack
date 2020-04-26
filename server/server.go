@@ -2,12 +2,12 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
-	"encoding/json"
 
 	"github.com/elastic/go-elasticsearch/v8"
 	"github.com/gorilla/mux"
@@ -15,9 +15,9 @@ import (
 
 // ESQuery attributes
 type ESQuery struct {
-	Search interface{} 
-	Index string
-  }
+	Search interface{}
+	Index  string
+}
 
 //Global es connection
 var es *elasticsearch.Client
@@ -49,11 +49,11 @@ func returnESSearch(w http.ResponseWriter, r *http.Request) {
 
 	queryStr, err := json.Marshal(esQuery.Search)
 	if err != nil {
-        fmt.Println(err.Error())
-        return
-    }
-     
-    jsonStr := string(queryStr)
+		fmt.Println(err.Error())
+		return
+	}
+
+	jsonStr := string(queryStr)
 
 	query := strings.NewReader(jsonStr)
 	// Perform the search request.
@@ -68,8 +68,15 @@ func returnESSearch(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatalf("Error getting response: %s", err)
 	}
+
 	defer res.Body.Close()
-	fmt.Fprintln(w, res)
+
+	var mapResp interface{}
+	// Decode the JSON response
+	if err := json.NewDecoder(res.Body).Decode(&mapResp); err != nil {
+		log.Fatalf("Error parsing the response body: %s", err)
+	}
+	json.NewEncoder(w).Encode(mapResp)
 }
 
 func handleRequests() {
