@@ -1,23 +1,26 @@
 import csv
-writer = csv.writer(open('college-tuition-data-cleaned.csv', 'wb'))
-with open('/Users/akshay/Desktop/Sql-nosql/dataset/college-tuition-data.csv', 'rb') as f:
+import sys
+
+# first arguments should be file name to change, the second argument will be new file name.
+
+filetochange = sys.argv[1]
+newfilename = sys.argv[2]
+
+writer = csv.writer(open(newfilename.strip(), 'w'))
+with open(filetochange.strip(), 'r') as f:
     reader = csv.reader(f, delimiter=',')
     header = next(reader)
     writer.writerow(header)
     rowlength = len(header)
+    count = 0
     for row in reader:
         for i in range(rowlength):
-            if row[i] == '':
+            if row[i] == '' or row[i] == 'N/A':
                 row[i] = 0
-        writer.writerow(row)
+            elif any(map(str.isdigit, row[i])) and "$" in row[i]:
+                row[i] = row[i].replace('$', '')
+                row[i] = int(float((row[i]).replace(',', '')))
+            else:
+                continue
 
-#     writer.writerow([
-#         row[0],
-#         row[1],
-#         int(float((row[2]).replace(',', ''))) if row[2] != '' else 0,
-#         int(float((row[3]).replace(',', ''))) if row[3] != '' else 0,
-#         int(float((row[4]).replace(',', ''))) if row[4] != '' else 0,
-#         int(float((row[5]).replace(',', ''))) if row[5] != '' else 0,
-#         int(float((row[6]).replace(',', ''))) if row[6] != '' else 0,
-#         int(float((row[7]).replace(',', ''))) if row[7] != '' else 0,
-#     ])
+        writer.writerow(row)
