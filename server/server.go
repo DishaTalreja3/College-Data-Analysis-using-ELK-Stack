@@ -7,10 +7,17 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"encoding/json"
 
 	"github.com/elastic/go-elasticsearch/v8"
 	"github.com/gorilla/mux"
 )
+
+// ESQuery attributes
+type ESQuery struct {
+	Search interface{} 
+	Index string
+  }
 
 //Global es connection
 var es *elasticsearch.Client
@@ -36,15 +43,23 @@ func returnESSearch(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: returnESSearch")
 
 	reqBody, _ := ioutil.ReadAll(r.Body)
+	var esQuery ESQuery
 
-	var b strings.Builder
-	b.Write(reqBody)
-	query := strings.NewReader(b.String())
+	json.Unmarshal(reqBody, &esQuery)
 
+	queryStr, err := json.Marshal(esQuery.Search)
+	if err != nil {
+        fmt.Println(err.Error())
+        return
+    }
+     
+    jsonStr := string(queryStr)
+
+	query := strings.NewReader(jsonStr)
 	// Perform the search request.
 	res, err := es.Search(
 		es.Search.WithContext(context.Background()),
-		es.Search.WithIndex("degreesthatpayback"),
+		es.Search.WithIndex(esQuery.Index),
 		es.Search.WithBody(query),
 		es.Search.WithTrackTotalHits(true),
 		es.Search.WithPretty(),
