@@ -1,0 +1,15 @@
+language: go
+sudo: false
+go:
+  - 1.14
+install:
+  - cd server
+services:
+  - docker
+
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=pokearu/college-data-server
+  - docker build -t college-data-server .
+  - docker tag college-data-server $REPO:latest
+  - docker push $REPO:latest
