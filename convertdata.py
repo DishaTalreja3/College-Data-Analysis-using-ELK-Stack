@@ -3,11 +3,23 @@ import sys
 
 # first arguments should be file name to change, the second argument will be new file name.
 
+if(len(sys.argv) < 2):
+    print("empty filenames. please give valid file names!")
+    exit()
+
+if(len(sys.argv) < 3):
+    print("missing input/output filename.")
+    exit()
+
 filetochange = sys.argv[1]
 newfilename = sys.argv[2]
 
-writer = csv.writer(open(newfilename.strip(), 'w'))
+if(filetochange == newfilename):
+    print("give different names for the input and output file")
+    exit()
+
 with open(filetochange.strip(), 'r') as f:
+    writer = csv.writer(open(newfilename.strip(), 'w'))
     reader = csv.reader(f, delimiter=',')
     header = next(reader)
     writer.writerow(header)
