@@ -20,7 +20,13 @@ header, .navStyle .dropdown-menu {
 .navbar {
   position: relative;
 }
-
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+#heading{
+	visibility: hidden;
+}
 .navbar-brand, strong {
   font-family: "Josefin Slab";
   font-weight: 700;
