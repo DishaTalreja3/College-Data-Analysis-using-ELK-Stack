@@ -1,3 +1,4 @@
+let collegeData = []
 
 function getOption(e) {
 	e.preventDefault();
@@ -10,17 +11,20 @@ function getOption(e) {
 	//Store a list of promises
 	let promiseList = []
 	//Append the promises
-	promiseList.push(getESData("salariesbyregion",universityByRegion(region)))
-	promiseList.push(getESData("salariesbycollegetype",universityByType(type)))
-	promiseList.push(getESData("collegetuitiondata",universityByTuitionAndSATAndControlByInstitution(30000,
-		15000,500,500,500,control
+	promiseList.push(getESData("salariesbyregion", universityByRegion(region)))
+	promiseList.push(getESData("salariesbycollegetype", universityByType(type)))
+	promiseList.push(getESData("collegetuitiondata", universityByTuitionAndSATAndControlByInstitution(30000,
+		15000, 500, 500, 500, control
 	)))
 	//Collect the results
-	Promise.all(promiseList).then(([regionData,typeData,tuitionData])=>{
-		console.log(regionData)
-		console.log(typeData)
-		console.log(tuitionData)
-	}).catch((error)=>{
+	Promise.all(promiseList).then(([regionData, typeData, tuitionData]) => {
+		// console.log(regionData)
+		// console.log(typeData)
+		// console.log(tuitionData)
+		var indexes = [2, 3, 4, 5, 7, 8, 9];
+		loopThrough(JSON.parse(tuitionData).aggregations, indexes, 0);
+		console.log(collegeData)
+	}).catch((error) => {
 		console.log(error)
 	})
 }
@@ -103,7 +107,7 @@ function parseQueryResult(e) {
 												"5": {
 													"buckets": [
 														{
-															"7": {
+															"7":{
 																"buckets": [
 																	{
 																		"8": {
@@ -174,7 +178,9 @@ function parseQueryResult(e) {
 		"took": 5
 	}`);
 	//	console.log(words.aggregations[2].buckets)
-	loopThrough(words.aggregations, 2);
+	var indexes = [2, 3, 4, 5, 7, 8, 9];
+	loopThrough(tuitionData.aggregations, indexes, 0);
+
 	// for (var i = 0; i < words.aggregations[2].buckets.length; i++) {
 	// 	console.log(words.aggregations[2].buckets[i])
 	// 	result = words.aggregations[2].buckets[i];
@@ -182,12 +188,66 @@ function parseQueryResult(e) {
 	// }
 	//var data = JSON.parse()
 }
-function loopThrough(content, index) {
-	for (var i = 0; i < content[index].buckets.length; i++) {
-		//	console.log(content[index].buckets[i])
-		result = content[index].buckets[i];
+let tmp = []
+function loopThrough(content, indexes, index) {
+	if (index === 4) {
+		//	console.log(content[index].key);
+		// console.log(content[index]);
 
-		console.log(result)
-		loopThrough(result, index + 1)
+	}
+	// console.log("index: " + index)
+
+	if (index == indexes.length) {
+		collegeData.push(tmp)
+		tmp = [tmp[0]]
+		return;
+
+	}
+
+
+	for (var i = 0; i < content[indexes[index]].buckets.length; i++) {
+		//console.log(content[index].buckets[i])
+		result = content[indexes[index]].buckets[i];
+
+		// console.log(result.key)
+		tmp.push(result.key)
+		// collegeData[i] = [...collegeData[i], result.key]
+
+		loopThrough(result, indexes, index + 1)
+
 	}
 }
+// function loopThrough(content, indexes, index) {
+// 	// if (index === 4) {
+// 	// 	console.log(content[index].key);
+// 	// 	console.log(content[index]);
+// 	// }
+// 	//console.log("index: " + index)
+// 	// if (index === 6) {
+// 	// 	return;
+// 	// 	//	index = index + 1;
+// 	// 	//console.log("index : " + index);
+// 	// }
+// 	if (typeof content[index] === 'undefined' || content[index] === null)
+// 		return;
+// 	// for(var index =0;index<indexes.length;index++){
+
+// 	// }
+
+// 	for (var i = 0; i < content[index].buckets.length; i++) {
+// 		//console.log(content[index].buckets[i])
+// 		result = content[index].buckets[i];
+
+// 		console.log(result.key)
+
+
+// 		// while (typeof content[index] === 'undefined' || content[index] === null)
+// 		// 	index++;
+// 		if (index === 5) {
+// 			index = index + 1;
+// 			//console.log("index : " + index);
+// 		}
+// 		loopThrough(result, indexes, index + 1)
+
+// 	}
+// }
