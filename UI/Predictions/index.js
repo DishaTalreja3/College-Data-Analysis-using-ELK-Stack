@@ -7,10 +7,22 @@ function getOption(e) {
 	reading = document.getElementById('reading').options[reading.selectedIndex].text;
 	writing = document.getElementById('writing').options[writing.selectedIndex].text;
 	math = document.getElementById('math').options[math.selectedIndex].text;
-	console.log(control)
-	console.log(universityByRegion(region))
-
-
+	//Store a list of promises
+	let promiseList = []
+	//Append the promises
+	promiseList.push(getESData("salariesbyregion",universityByRegion(region)))
+	promiseList.push(getESData("salariesbycollegetype",universityByType(type)))
+	promiseList.push(getESData("collegetuitiondata",universityByTuitionAndSATAndControlByInstitution(30000,
+		15000,500,500,500,control
+	)))
+	//Collect the results
+	Promise.all(promiseList).then(([regionData,typeData,tuitionData])=>{
+		console.log(regionData)
+		console.log(typeData)
+		console.log(tuitionData)
+	}).catch((error)=>{
+		console.log(error)
+	})
 }
 
 function parseQueryResult(e) {

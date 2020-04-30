@@ -362,4 +362,11 @@ const universityByTuitionAndSATAndControlByInstitution = (UpperLimitTuitionFee, 
     }
 
     return query
-  }
+}
+
+const getESData = (index,query) =>{
+    return $.post("http://149.165.171.6:30005/essearch",JSON.stringify({
+        "Index":index,
+        "Search":query
+    }))
+}
