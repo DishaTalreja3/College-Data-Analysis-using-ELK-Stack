@@ -84,3 +84,91 @@ const universityByRegion = (region) => {
 
     return query
 }
+
+const universityByType = (collegeType) =>{
+  let query = {
+    "aggs": {
+      "2": {
+        "terms": {
+          "field": "School Type",
+          "order": {
+            "_count": "desc"
+          },
+          "size": 10
+        },
+        "aggs": {
+          "3": {
+            "terms": {
+              "field": "School Name",
+              "order": {
+                "3-orderAgg": "desc"
+              },
+              "size": 500
+            },
+            "aggs": {
+              "4": {
+                "terms": {
+                  "field": "Starting Median Salary",
+                  "order": {
+                    "_count": "desc"
+                  },
+                  "size": 5
+                }
+              },
+              "3-orderAgg": {
+                "max": {
+                  "field": "Starting Median Salary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "size": 0,
+    "stored_fields": [
+      "*"
+    ],
+    "script_fields": {},
+    "docvalue_fields": [],
+    "_source": {
+      "excludes": []
+    },
+    "query": {
+      "bool": {
+        "must": [],
+        "filter": [
+          {
+            "bool": {
+              "should": [
+                {
+                  "match_phrase": {
+                    "School Type": "State"
+                  }
+                }
+              ],
+              "minimum_should_match": 1
+            }
+          },
+          {
+            "bool": {
+              "should": [
+                {
+                  "match_phrase": {
+                    "School Type": "" + collegeType
+                  }
+                }
+              ],
+              "minimum_should_match": 1
+            }
+          }
+        ],
+        "should": [],
+        "must_not": []
+      }
+    }
+  }
+
+  return query
+}
+
