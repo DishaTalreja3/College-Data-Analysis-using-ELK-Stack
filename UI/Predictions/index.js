@@ -161,6 +161,21 @@ function parseQueryResult(e) {
 		"timed_out": false,
 		"took": 5
 	}`);
-	console.log(words.aggregations)
+	//	console.log(words.aggregations[2].buckets)
+	loopThrough(words.aggregations, 2);
+	// for (var i = 0; i < words.aggregations[2].buckets.length; i++) {
+	// 	console.log(words.aggregations[2].buckets[i])
+	// 	result = words.aggregations[2].buckets[i];
+	// 	console.log(result[3].buckets)
+	// }
 	//var data = JSON.parse()
+}
+function loopThrough(content, index) {
+	for (var i = 0; i < content[index].buckets.length; i++) {
+		//	console.log(content[index].buckets[i])
+		result = content[index].buckets[i];
+
+		console.log(result)
+		loopThrough(result, index + 1)
+	}
 }
