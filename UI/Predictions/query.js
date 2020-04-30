@@ -62,18 +62,6 @@ const universityByRegion = (region) => {
                   ],
                   "minimum_should_match": 1
                 }
-              },
-              {
-                "bool": {
-                  "should": [
-                    {
-                      "match_phrase": {
-                        "Region": "California"
-                      }
-                    }
-                  ],
-                  "minimum_should_match": 1
-                }
               }
             ],
             "should": [],
@@ -138,18 +126,6 @@ const universityByType = (collegeType) =>{
       "bool": {
         "must": [],
         "filter": [
-          {
-            "bool": {
-              "should": [
-                {
-                  "match_phrase": {
-                    "School Type": "State"
-                  }
-                }
-              ],
-              "minimum_should_match": 1
-            }
-          },
           {
             "bool": {
               "should": [
