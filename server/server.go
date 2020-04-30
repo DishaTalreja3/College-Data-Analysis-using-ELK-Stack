@@ -86,7 +86,8 @@ func handleRequests() {
 	//Routes
 	myRouter.HandleFunc("/esinfo", returnESInfo)
 	myRouter.HandleFunc("/essearch", returnESSearch).Methods("POST", "OPTIONS")
-
+	//Serve static content
+	myRouter.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 	//Set CORS
 	myRouter.Use(mux.CORSMethodMiddleware(myRouter))
 	// finally, instead of passing in nil, we want
