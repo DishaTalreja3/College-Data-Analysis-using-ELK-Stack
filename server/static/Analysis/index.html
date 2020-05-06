@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Analysis</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+	<!-- <div class="pos-f-t">
+		<div class="collapse" id="navbarToggleExternalContent">
+			<div class="bg-dark p-4">
+				<h4 class="text-white">Collapsed content</h4>
+				<span class="text-muted">Toggleable via the navbar brand.</span>
+			</div>
+		</div>
+		<nav class="navbar navbar-dark bg-dark">
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</nav>
+	</div> -->
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item ">
+					<a class="nav-link" href="../index.html">Graphs</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../Predictions/index.html">Prediction</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="./index.html">Analysis<span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="timeline-container" id="timeline-1">
+
+		<div class="timeline-header">
+			<h2 class="timeline-header__title">Analysis of Salaries by Major</h2>
+
+		</div>
+		<div class="timeline">
+
+			<div class="timeline-item" data-text="Click here to add custom filters"
+				onclick="location.href=`http://149.165.171.6:30854/app/kibana#/visualize/edit/a9059010-8693-11ea-b424-cb54eda99cd0?embed=true&_g=(refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(filters:!(),linked:!f,query:(language:kuery,query:''),uiState:(),vis:(aggs:!((enabled:!t,id:'1',params:(field:'Starting%20Median%20Salary'),schema:metric,type:max),(enabled:!t,id:'2',params:(customLabel:'',field:'Undergraduate%20Major',missingBucket:!f,missingBucketLabel:Missing,order:desc,orderBy:'1',otherBucket:!f,otherBucketLabel:Other,size:10),schema:segment,type:terms)),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,categoryAxes:!((id:CategoryAxis-1,labels:(filter:!f,rotate:0,show:!t,truncate:200),position:left,scale:(type:linear),show:!t,style:(),title:(),type:category)),dimensions:(x:(accessor:0,aggType:terms,format:(id:terms,params:(id:string,missingBucketLabel:Missing,otherBucketLabel:Other,parsedUrl:(basePath:'',origin:'http:%2F%2F149.165.171.6:30854',pathname:%2Fapp%2Fkibana))),label:Major,params:()),y:!((accessor:1,aggType:max,format:(id:number,params:(parsedUrl:(basePath:'',origin:'http:%2F%2F149.165.171.6:30854',pathname:%2Fapp%2Fkibana))),label:'Max%20Starting%20Median%20Salary',params:()))),grid:(categoryLines:!f),labels:(),legendPosition:right,seriesParams:!((data:(id:'1',label:'Max%20Starting%20Median%20Salary'),drawLinesBetweenPoints:!t,lineWidth:2,mode:normal,show:!t,showCircles:!t,type:histogram,valueAxis:ValueAxis-1)),thresholdLine:(color:%23E7664C,show:!f,style:full,value:10,width:1),times:!(),type:histogram,valueAxes:!((id:ValueAxis-1,labels:(filter:!t,rotate:75,show:!t,truncate:100),name:BottomAxis-1,position:bottom,scale:(mode:normal,type:linear),show:!t,style:(),title:(text:'Max%20Starting%20Median%20Salary'),type:value))),title:StartingMedianSalaryMajor,type:horizontal_bar))`;">
+				<div class="timeline__content">
+					<img class="timeline__img"
+						src="https://raw.githubusercontent.com/pokearu/SQLNoSQL-Project/release/Visualizations/startingSalaryBymajorTop40.jpeg" />
+					<br>
+					<h2 class="timeline__content-title">Starting Median Salary by Major</h2>
+					<p class="timeline__content-desc">Analysis: On looking at the graph which is sorted by starting
+						salaries in descending order we can observe that Physician's Assistants have had very high
+						starting
+						salaries,
+						followed by engineering majors. Nursing major have salaries higher than one might expect. Next
+						in the line are
+						majors such as Business Management, Political Science, Marketing. At the bottom, we have the art
+						majors: Music, Drama, Art, followed by Education, Religion, and Spanish.
+					</p>
+				</div>
+			</div>
+			<div class="timeline-item" data-text="Click here to add custom filters"
+				onclick="location.href=`http://149.165.171.6:30854/app/kibana#/visualize/edit/5aee1140-8fb7-11ea-b424-cb54eda99cd0?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(filters:!(),linked:!f,query:(language:kuery,query:''),uiState:(vis:(defaultColors:('52,000%20-%2053,550':'rgb(247,251,255)','53,550%20-%2055,100':'rgb(198,219,239)','55,100%20-%2056,650':'rgb(107,174,214)','56,650%20-%2058,200':'rgb(33,113,181)'))),vis:(aggs:!((enabled:!t,id:'1',params:(field:'Mid-Career%20Median%20Salary'),schema:metric,type:max),(enabled:!t,id:'2',params:(customLabel:'Undergraduate%20Major',field:'Undergraduate%20Major',missingBucket:!f,missingBucketLabel:Missing,order:desc,orderAgg:(enabled:!t,id:'2-orderAgg',params:(field:'Mid-Career%20Median%20Salary'),schema:(aggFilter:!('!!top_hits','!!percentiles','!!median','!!std_dev','!!derivative','!!moving_avg','!!serial_diff','!!cumulative_sum','!!avg_bucket','!!max_bucket','!!min_bucket','!!sum_bucket'),editor:!f,group:none,hideCustomLabel:!t,max:!n,min:0,name:orderAgg,params:!(),title:'Order%20Agg'),type:max),orderBy:custom,otherBucket:!f,otherBucketLabel:Other,size:10),schema:segment,type:terms)),params:(addLegend:!t,addTooltip:!t,colorSchema:Blues,colorsNumber:4,colorsRange:!(),dimensions:(x:(accessor:0,aggType:terms,format:(id:terms,params:(id:string,missingBucketLabel:Missing,otherBucketLabel:Other,parsedUrl:(basePath:'',origin:'http:%2F%2F149.165.171.6:30854',pathname:%2Fapp%2Fkibana))),label:'Undergraduate%20Major',params:()),y:!((accessor:1,aggType:max,format:(id:number,params:(parsedUrl:(basePath:'',origin:'http:%2F%2F149.165.171.6:30854',pathname:%2Fapp%2Fkibana))),label:'Max%20Mid-Career%20Median%20Salary',params:()))),enableHover:!f,invertColors:!f,legendPosition:right,percentageMode:!f,setColorRange:!f,times:!(),type:heatmap,valueAxes:!((id:ValueAxis-1,labels:(color:black,overwriteColor:!f,rotate:0,show:!t),scale:(defaultYExtents:!t,type:'square%20root'),show:!f,type:value))),title:MidCareerMaxSalaryByMajor,type:heatmap))`;">
+				<div class="timeline__content">
+					<img class="timeline__img"
+						src="https://raw.githubusercontent.com/pokearu/SQLNoSQL-Project/release/Visualizations/midCareer.jpeg" />
+					<br>
+					<h2 class="timeline__content-title">Mid Career Salaries by Major</h2>
+					<p class="timeline__content-desc">Analysis : Let's add the (median) mid-career salary, which will be
+						more important over the long-haul.
+						When we plot the mid-career salaries, we see that majors carry generally the same
+						pattern, but there are some shifts as well. Physicians Assistants, Nursing, and Nutrition majors
+						all seem to have some decreases in the rankings.
+					</p>
+				</div>
+			</div>
+			<div class="timeline-item" data-text="Click here to add custom filters"
+				onclick="location.href=`http://149.165.171.6:30854/app/kibana#/visualize/edit/d1b069b0-8fba-11ea-b424-cb54eda99cd0?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(filters:!(),linked:!f,query:(language:kuery,query:''),uiState:(vis:(colors:('Mid%20Career%20Salary':%230A437C,'Starting%20Salary':%235195CE))),vis:(aggs:!((enabled:!t,id:'3',params:(customLabel:'Starting%20Salary',field:'Starting%20Median%20Salary'),schema:metric,type:avg),(enabled:!t,id:'2',params:(customLabel:'Mid%20Career%20Salary',field:'Mid-Career%20Median%20Salary'),schema:metric,type:avg),(enabled:!t,id:'4',params:(customLabel:'Undergraduate%20Major',field:'Undergraduate%20Major',missingBucket:!f,missingBucketLabel:Missing,order:desc,orderBy:'2',otherBucket:!f,otherBucketLabel:Other,size:10),schema:segment,type:terms)),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,categoryAxes:!((id:CategoryAxis-1,labels:(filter:!t,show:!t,truncate:100),position:bottom,scale:(type:linear),show:!t,style:(),title:(),type:category)),dimensions:(x:(accessor:0,aggType:terms,format:(id:terms,params:(id:string,missingBucketLabel:Missing,otherBucketLabel:Other,parsedUrl:(basePath:'',origin:'http:%2F%2F149.165.171.6:30854',pathname:%2Fapp%2Fkibana))),label:'Undergraduate%20Major',params:()),y:!((accessor:1,aggType:avg,format:(id:number,params:(parsedUrl:(basePath:'',origin:'http:%2F%2F149.165.171.6:30854',pathname:%2Fapp%2Fkibana))),label:'Starting%20Salary',params:()),(accessor:2,aggType:avg,format:(id:number,params:(parsedUrl:(basePath:'',origin:'http:%2F%2F149.165.171.6:30854',pathname:%2Fapp%2Fkibana))),label:'Mid%20Career%20Salary',params:()))),grid:(categoryLines:!f),labels:(show:!t),legendPosition:right,orderBucketsBySum:!f,seriesParams:!((data:(id:'3',label:'Starting%20Salary'),drawLinesBetweenPoints:!t,lineWidth:2,mode:normal,show:!t,showCircles:!t,type:histogram,valueAxis:ValueAxis-1),(data:(id:'2',label:'Mid%20Career%20Salary'),drawLinesBetweenPoints:!t,interpolate:step-after,lineWidth:2,mode:normal,show:!t,showCircles:!t,type:histogram,valueAxis:ValueAxis-1)),thresholdLine:(color:%23E7664C,show:!f,style:full,value:10,width:1),times:!(),type:histogram,valueAxes:!((id:ValueAxis-1,labels:(filter:!f,rotate:0,show:!t,truncate:100),name:LeftAxis-1,position:left,scale:(mode:normal,type:linear),show:!t,style:(),title:(text:Count),type:value))),title:StartingVsMidCareerSalaryByMajor,type:histogram))`;">
+				<div class="timeline__content"><img class="timeline__img"
+						src="https://raw.githubusercontent.com/pokearu/SQLNoSQL-Project/release/Visualizations/startingSalaryVsMidCareerByMajor.jpeg" />
+					<h2 class="timeline__content-title">Starting Vs Mid Career Salary by Major</h2>
+					<p class="timeline__content-desc">Let's sort by the (median) mid-career salary, since it is more
+						important. We will also have the median starting salary as a benchmark of
+						potential interest.
+						<br />git
+						Analysis: We observe again that the Physicians Assistants, Nursing, and Nutrition majors have
+						fallen
+						in the rankings. Top money makers (by mid-career salaries) are the engineering majors, with
+						Chemical Engineering at the top.</p>
+				</div>
+			</div>
+			<div class="timeline-item" data-text="Click here to add custom filters"
+				onclick="location.href=`http://149.165.171.6:30854/app/kibana#/visualize/edit/372feca0-8fbd-11ea-b424-cb54eda99cd0?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(filters:!(),linked:!f,query:(language:kuery,query:''),uiState:(vis:(colors:('Max%20Mid-Career%2010th%20Percentile%20Salary':%23F9D9F9,'Max%20Mid-Career%2025th%20Percentile%20Salary':%23E5A8E2,'Max%20Mid-Career%2090th%20Percentile%20Salary':%23511749))),vis:(aggs:!((enabled:!t,id:'3',params:(field:'Undergraduate%20Major',missingBucket:!f,missingBucketLabel:Missing,order:desc,orderBy:'6',otherBucket:!f,otherBucketLabel:Other,size:10),schema:segment,type:terms),(enabled:!t,id:'5',params:(field:'Mid-Career%2010th%20Percentile%20Salary'),schema:metric,type:max),(enabled:!t,id:'1',params:(field:'Mid-Career%2025th%20Percentile%20Salary'),schema:metric,type:max),(enabled:!t,id:'6',params:(field:'Mid-Career%20Median%20Salary'),schema:metric,type:max),(enabled:!t,id:'2',params:(field:'Mid-Career%2075th%20Percentile%20Salary'),schema:metric,type:max),(enabled:!t,id:'4',params:(field:'Mid-Career%2090th%20Percentile%20Salary'),schema:metric,type:max)),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,categoryAxes:!((id:CategoryAxis-1,labels:(filter:!t,show:!t,truncate:100),position:bottom,scale:(type:linear),show:!t,style:(),title:(),type:category)),dimensions:(x:(accessor:0,aggType:terms,format:(id:terms,params:(id:string,missingBucketLabel:Missing,otherBucketLabel:Other,parsedUrl:(basePath:'',origin:'http:%2F%2F149.165.171.6:30854',pathname:%2Fapp%2Fkibana))),label:'Undergraduate%20Major:%20Descending',params:()),y:!((accessor:1,aggType:max,format:(id:number,params:(parsedUrl:(basePath:'',origin:'http:%2F%2F149.165.171.6:30854',pathname:%2Fapp%2Fkibana))),label:'Max%20Mid-Career%2010th%20Percentile%20Salary',params:()),(accessor:2,aggType:max,format:(id:number,params:(parsedUrl:(basePath:'',origin:'http:%2F%2F149.165.171.6:30854',pathname:%2Fapp%2Fkibana))),label:'Max%20Mid-Career%2025th%20Percentile%20Salary',params:()),(accessor:3,aggType:max,format:(id:number,params:(parsedUrl:(basePath:'',origin:'http:%2F%2F149.165.171.6:30854',pathname:%2Fapp%2Fkibana))),label:'Max%20Mid-Career%2075th%20Percentile%20Salary',params:()),(accessor:4,aggType:max,format:(id:number,params:(parsedUrl:(basePath:'',origin:'http:%2F%2F149.165.171.6:30854',pathname:%2Fapp%2Fkibana))),label:'Max%20Mid-Career%2090th%20Percentile%20Salary',params:()))),grid:(categoryLines:!f),labels:(show:!f),legendPosition:right,seriesParams:!((data:(id:'5',label:'Max%20Mid-Career%2010th%20Percentile%20Salary'),drawLinesBetweenPoints:!t,lineWidth:2,mode:normal,show:!t,showCircles:!t,type:histogram,valueAxis:ValueAxis-1),(data:(id:'1',label:'Max%20Mid-Career%2025th%20Percentile%20Salary'),drawLinesBetweenPoints:!t,lineWidth:2,mode:normal,show:!t,showCircles:!t,type:histogram,valueAxis:ValueAxis-1),(data:(id:'6',label:'Max%20Mid-Career%20Median%20Salary'),drawLinesBetweenPoints:!t,lineWidth:2,mode:normal,show:!t,showCircles:!t,type:histogram,valueAxis:ValueAxis-1),(data:(id:'2',label:'Max%20Mid-Career%2075th%20Percentile%20Salary'),drawLinesBetweenPoints:!t,lineWidth:2,mode:normal,show:!t,showCircles:!t,type:histogram,valueAxis:ValueAxis-1),(data:(id:'4',label:'Max%20Mid-Career%2090th%20Percentile%20Salary'),drawLinesBetweenPoints:!t,lineWidth:2,mode:normal,show:!t,showCircles:!t,type:histogram,valueAxis:ValueAxis-1)),thresholdLine:(color:%23E7664C,show:!f,style:full,value:10,width:1),times:!(),type:histogram,valueAxes:!((id:ValueAxis-1,labels:(filter:!f,rotate:0,show:!t,truncate:100),name:LeftAxis-1,position:left,scale:(mode:normal,type:linear),show:!t,style:(),title:(text:'Max%20Mid-Career%2025th%20Percentile%20Salary'),type:value))),title:AllPercentilesByMajor,type:histogram))`;">
+				<div class="timeline__content"><img class="timeline__img"
+						src="https://raw.githubusercontent.com/pokearu/SQLNoSQL-Project/release/Visualizations/allPercentilesByMajor.jpeg" />
+					<h2 class="timeline__content-title">Comparing all mid career percentiles by major</h2>
+					<p class="timeline__content-desc">
+						Let's start by sorting and plotting the mid career salaries ,lets do that by plotting
+						10th,25th,75th,95th
+						percentile mid career salaries.
+						<br />
+						<br />
+						Analysis: Again, we observe that the Engineering Majors earn the most money
+
+						In general, looking at the medians,we observe that most people make between 50K and
+						100K as their annual salaries mid-way through their careers. For the top performers (75th
+						percentile),
+						that range
+						would be between 75K and 125K. The best top performers (90th percentile.) get a take home salary
+						between
+						100K and
+						200K yearly.
+
+						It is interesting to observe that some majors have pretty conservative ranges of salary like
+						Physician's
+						Assistants and Nursing majors.
+
+						When it comes to the arts majors of Music and Drama, the top performers do very well -- the top
+						10%
+						performers (musicians, actors) do very well, making more money than the top 25% of
+						performers in the engineering/math/science majors.
+
+						The people who make the most money, the top 10% of performers, are Economics and
+						Finance majors.</p>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script>
+	(function ($) {
+		$.fn.timeline = function () {
+			var selectors = {
+				id: $(this),
+				item: $(this).find(".timeline-item"),
+				activeClass: "timeline-item--active",
+				img: ".timeline__img"
+			};
+			selectors.item.eq(0).addClass(selectors.activeClass);
+			selectors.id.css(
+				"background-image",
+				"url(" + "https://github.com/pokearu/SQLNoSQL-Project/blob/master/Visualizations/accomplishment-ceremony-education-graduation-267885.jpg?raw=true" + ")"
+			);
+			var itemLength = selectors.item.length;
+			$(window).scroll(function () {
+				var max, min;
+				var pos = $(this).scrollTop();
+				selectors.item.each(function (i) {
+					min = $(this).offset().top;
+					max = $(this).height() + $(this).offset().top;
+					var that = $(this);
+					if (i == itemLength - 2 && pos > min + $(this).height() / 2) {
+						selectors.item.removeClass(selectors.activeClass);
+						selectors.id.css(
+							"background-image",
+							"url(" + "https://github.com/pokearu/SQLNoSQL-Project/blob/master/Visualizations/accomplishment-ceremony-education-graduation-267885.jpg?raw=true" + ")"
+						);
+						selectors.item.last().addClass(selectors.activeClass);
+					} else if (pos <= max - 40 && pos >= min) {
+						selectors.id.css(
+							"background-image",
+							"url(" + "https://github.com/pokearu/SQLNoSQL-Project/blob/master/Visualizations/accomplishment-ceremony-education-graduation-267885.jpg?raw=true" + ")"
+						);
+						selectors.item.removeClass(selectors.activeClass);
+						$(this).addClass(selectors.activeClass);
+					}
+				});
+			});
+		};
+	})(jQuery);
+
+	$("#timeline-1").timeline();
+
+</script>
+
+</html>
