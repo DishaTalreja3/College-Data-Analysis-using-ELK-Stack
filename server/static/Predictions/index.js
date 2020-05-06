@@ -32,10 +32,15 @@ function getOption(e) {
 		var indexes = [2, 3, 4];
 		//var indexes = [2, 3, 4, 5];
 		//loopThrough(JSON.parse(tuitionData).aggregations, indexes, 0);
+		var myObject = {
+			colData: [],
+			temp: []
+		}
 		match = []
-		match = getRegionAndTypeData(regionData, typeData)
-		//	getTuitionData(tuitionData, match)
-		console.log(match)
+		match = getRegionAndTypeData(regionData, typeData, myObject)
+
+		//getTuitionData(tuitionData, match, tuitionObject)
+		//console.log(match)
 		populateOverallOverview(match)
 		// //console.log(typeData)
 		// console.log(collegeData)
@@ -248,16 +253,20 @@ function populateOverallOverview(result) {
 	// addCell(row, item[2]);
 	//});
 }
-function getRegionAndTypeData(regionData, typeData) {
+function getRegionAndTypeData(regionData, typeData, myObject) {
 	var indexes = [2, 3, 4];
-	loopThrough(JSON.parse(regionData).aggregations, indexes, 0);
-	var regionResult = collegeData;
+	loopThrough(JSON.parse(regionData).aggregations, indexes, 0, myObject);
+	var regionResult = myObject.colData;
 	//console.log(regionResult)
-	collegeData = []
-	tmp = []
+	// collegeData = []
+	// tmp = []
 	var result = []
-	loopThrough(JSON.parse(typeData).aggregations, indexes, 0);
-	var typeResult = collegeData;
+	var tuitionObject = {
+		colData: [],
+		temp: []
+	}
+	loopThrough(JSON.parse(typeData).aggregations, indexes, 0, tuitionObject);
+	var typeResult = tuitionObject.colData;
 	//console.log(typeResult)
 	for (var i = 0; i < regionResult.length; i++) {
 		var arr = regionResult[i];
@@ -275,13 +284,13 @@ function getRegionAndTypeData(regionData, typeData) {
 	return result;
 
 }
-function getTuitionData(tuitionData, match) {
+function getTuitionData(tuitionData, match, tuitionObject) {
 	var indexes = [2, 3, 4, 5, 7, 8, 9];
 	collegeData = []
 	tmp = []
 	//console.log(tuitionData)
-	loopThrough(JSON.parse(tuitionData).aggregations, indexes, 0);
-	var tuitionResult = collegeData;
+	loopThrough(JSON.parse(tuitionData).aggregations, indexes, 0, tuitionObject);
+	var tuitionResult = tuitionObject.colData;
 	var result = []
 	// console.log(tuitionResult)
 	// console.log(match)
@@ -305,7 +314,7 @@ function getTuitionData(tuitionData, match) {
 
 }
 let tmp = []
-function loopThrough(content, indexes, index) {
+function loopThrough(content, indexes, index, myObject) {
 	if (index === 4) {
 		//	console.log(content[index].key);
 		// console.log(content[index]);
@@ -315,9 +324,9 @@ function loopThrough(content, indexes, index) {
 
 	if (index == indexes.length) {
 
-		collegeData.push(tmp)
+		myObject.colData.push(myObject.temp)
 
-		tmp = [tmp[0]]
+		myObject.temp = [myObject.temp[0]]
 		return;
 
 	}
@@ -328,10 +337,10 @@ function loopThrough(content, indexes, index) {
 		result = content[indexes[index]].buckets[i];
 
 		// console.log(result.key)
-		tmp.push(result.key)
+		myObject.temp.push(result.key)
 		// collegeData[i] = [...collegeData[i], result.key]
 
-		loopThrough(result, indexes, index + 1)
+		loopThrough(result, indexes, index + 1, myObject)
 
 	}
 }
