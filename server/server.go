@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -11,6 +12,12 @@ import (
 	"github.com/elastic/go-elasticsearch/v8"
 	"github.com/gorilla/mux"
 )
+
+// ESQuery attributes
+type ESQuery struct {
+	Search interface{}
+	Index  string
+}
 
 //Global es connection
 var es *elasticsearch.Client
@@ -36,15 +43,23 @@ func returnESSearch(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: returnESSearch")
 
 	reqBody, _ := ioutil.ReadAll(r.Body)
+	var esQuery ESQuery
 
-	var b strings.Builder
-	b.Write(reqBody)
-	query := strings.NewReader(b.String())
+	json.Unmarshal(reqBody, &esQuery)
 
+	queryStr, err := json.Marshal(esQuery.Search)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	jsonStr := string(queryStr)
+
+	query := strings.NewReader(jsonStr)
 	// Perform the search request.
 	res, err := es.Search(
 		es.Search.WithContext(context.Background()),
-		es.Search.WithIndex("degreesthatpayback"),
+		es.Search.WithIndex(esQuery.Index),
 		es.Search.WithBody(query),
 		es.Search.WithTrackTotalHits(true),
 		es.Search.WithPretty(),
@@ -53,8 +68,15 @@ func returnESSearch(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatalf("Error getting response: %s", err)
 	}
+
 	defer res.Body.Close()
-	fmt.Fprintln(w, res)
+
+	var mapResp interface{}
+	// Decode the JSON response
+	if err := json.NewDecoder(res.Body).Decode(&mapResp); err != nil {
+		log.Fatalf("Error parsing the response body: %s", err)
+	}
+	json.NewEncoder(w).Encode(mapResp)
 }
 
 func handleRequests() {
@@ -64,7 +86,8 @@ func handleRequests() {
 	//Routes
 	myRouter.HandleFunc("/esinfo", returnESInfo)
 	myRouter.HandleFunc("/essearch", returnESSearch).Methods("POST", "OPTIONS")
-
+	//Serve static content
+	myRouter.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 	//Set CORS
 	myRouter.Use(mux.CORSMethodMiddleware(myRouter))
 	// finally, instead of passing in nil, we want
